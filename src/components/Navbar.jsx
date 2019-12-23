@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
 import {
   Collapse,
   Navbar,
@@ -43,6 +44,7 @@ const NavBar = props => {
                 onSubmit={e => {
                   e.preventDefault();
                   props.fetchMovies(search);
+                  props.history.push("/movies");
                 }}
               >
                 <Button color="primary" size="sm">
@@ -50,7 +52,9 @@ const NavBar = props => {
                 </Button>
                 <input
                   placeholder="Enter movie or show name"
-                  onChange={e => setSearch(e.target.value)}
+                  onChange={e => {
+                    setSearch(e.target.value);
+                  }}
                 />
               </form>
             </NavItem>

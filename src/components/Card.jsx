@@ -25,7 +25,7 @@ const MovieCard = ({ movie, addFav, favorites }) => {
         <CardBody>
           <CardTitle>{movie.Title}</CardTitle>
           <CardSubtitle>{movie.Year}</CardSubtitle>
-          {favorites.includes(movie) ? (
+          {favorites.find(fav => fav.Title == movie.Title) ? (
             "You love this movie!"
           ) : (
             <Button size="sm" onClick={e => addFav(movie)}>

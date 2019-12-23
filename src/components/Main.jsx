@@ -4,14 +4,18 @@ import { Switch, Route } from "react-router-dom";
 
 import axios from "axios";
 import Movies from "./Movies";
+import Favorites from "./Favorites";
+import Movie from "./Movie";
 
 export default function Main() {
   return (
     <div>
-      <NavBar></NavBar>
+      <Route render={({ history }) => <NavBar history={history} />} />
+
       <Switch>
         <Route exact path="/movies" component={Movies}></Route>
         <Route exact path="/favorites" component={Favorites} />
+        <Route path="/movies/:movieID" component={Movie} />
       </Switch>
     </div>
   );
