@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import MovieCard from "./Card";
 
 function Movies(props) {
-  return (
+  return props.movies.length ? (
     <Container>
       <Row xs="5">
         {props.movies.map &&
@@ -14,6 +14,8 @@ function Movies(props) {
           ))}
       </Row>
     </Container>
+  ) : (
+    "Please search for something first!"
   );
 }
 

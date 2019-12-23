@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import MovieCard from "./Card";
 
 function Movies(props) {
-  return (
+  return props.favorites.length ? (
     <Container>
       <Row xs="5">
         {props.favorites.map &&
@@ -14,6 +14,8 @@ function Movies(props) {
           ))}
       </Row>
     </Container>
+  ) : (
+    "You haven't liked any movies yet!"
   );
 }
 
