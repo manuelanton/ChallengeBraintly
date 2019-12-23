@@ -1,6 +1,23 @@
-import { combineReducers } from "redux";
-import { countriesReducer } from "./countryReducer";
+import { RECEIVE_MOVIE, RECEIVE_MOVIES, ADD_FAVORITE } from "../constants";
 
-const reducers = { countries: countriesReducer };
+const initialState = {
+  selectedMovie: {},
+  movies: [],
+  favorites: []
+};
 
-export default combineReducers(reducers);
+export default function rootReducer(state = initialState, action) {
+  switch (action.type) {
+    case RECEIVE_MOVIE: {
+      return { ...state, selectedMovie: action.movie };
+    }
+    case RECEIVE_MOVIES: {
+      return { ...state, movies: action.movies.Search };
+    }
+    case ADD_FAVORITE: {
+      return { ...state, favorites: [...state.favorites, action.movie] };
+    }
+    default:
+      return state;
+  }
+}

@@ -2,7 +2,6 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const db = require("../db");
 const chalk = require("chalk");
 
 const DIST_DIR = path.join(__dirname, "../dist");
@@ -19,16 +18,10 @@ app.use(morgan("tiny"));
 
 app.use(express.static(DIST_DIR));
 
-//use modular routes
-app.use("/api", require("../routes/api"));
-app.use("/", require("../routes/index"));
+app.get("/*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../dist/index.html"));
+});
 
-//sync database then start server
-db.sync({ force: false })
-  .then(() => {
-    console.log(chalk.black.bgGreen.bold("Connected to database..."));
-    app.listen(port, () =>
-      console.log(chalk.black.bgWhite.bold(`Listening on port ${port}`))
-    );
-  })
-  .catch(console.error); //error catcher
+app.listen(port, () =>
+  console.log(chalk.black.bgWhite.bold(`Listening on port ${port}`))
+);
