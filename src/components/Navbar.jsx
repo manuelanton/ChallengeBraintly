@@ -23,7 +23,7 @@ const NavBar = props => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div>
+    <div style={{ marginBottom: "15px" }}>
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">OMDB</NavbarBrand>
         <NavbarToggler onClick={toggle} />

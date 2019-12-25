@@ -45,7 +45,9 @@ const Movie = ({ selectedMovie, addFav, favorites, fetchMovie, match }) => {
               <br />
               <br />
 
-              {favorites.find(movie => movie.Title == selectedMovie.Title) ? (
+              {favorites.find(
+                fav => fav.Title == movie.Title && fav.Year == movie.Year
+              ) ? (
                 "You love this movie!"
               ) : (
                 <Button size="sm" onClick={e => addFav(selectedMovie)}>

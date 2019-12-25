@@ -39,7 +39,9 @@ const MovieCard = ({ movie, addFav, favorites }) => {
                 <CardSubtitle>{movie.Year}</CardSubtitle>
                 <br />
               </div>
-              {favorites.find(fav => fav.Title == movie.Title) ? (
+              {favorites.find(
+                fav => fav.Title == movie.Title && fav.Year == movie.Year
+              ) ? (
                 "You love this movie!"
               ) : (
                 <div
