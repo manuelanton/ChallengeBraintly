@@ -50,12 +50,14 @@ const NavBar = props => {
                 <Button color="primary" size="sm">
                   SEARCH
                 </Button>
-                <input
-                  placeholder="Enter movie or show name"
-                  onChange={e => {
-                    setSearch(e.target.value);
-                  }}
-                />
+                <div style={{ float: "right" }}>
+                  <input
+                    placeholder="Enter movie or show name"
+                    onChange={e => {
+                      setSearch(e.target.value);
+                    }}
+                  />
+                </div>
               </form>
             </NavItem>
           </Nav>
