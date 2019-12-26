@@ -15,7 +15,7 @@ function Movies(props) {
       </Row>
     </Container>
   ) : (
-    <h1> Please search for something first!</h1>
+    <h2 style={{ margin: "10px" }}> Please search for something first!</h2>
   );
 }
 
