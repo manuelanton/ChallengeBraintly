@@ -12,15 +12,21 @@ import {
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { addFav } from "../store/actions";
+import { addFav, removeFav } from "../store/actions";
 
-const MovieCard = ({ movie, addFav, favorites }) => {
+const MovieCard = ({ movie, addFav, removeFav, favorites }) => {
   return (
     <div style={{ textAlign: "center" }}>
       <Card>
         <Link to={`/movies/${movie.imdbID}`}>
           <div style={{ height: "80%", alignSelf: "center" }}>
-            <CardImg top width="100%" height="200px" src={movie.Poster} />
+            <CardImg
+              top
+              width="100%"
+              height="200px"
+              src={movie.Poster}
+              style={{ objectFit: "contain" }}
+            />
           </div>
         </Link>
         <div style={{ height: "170px" }}>
@@ -42,7 +48,17 @@ const MovieCard = ({ movie, addFav, favorites }) => {
               {favorites.find(
                 fav => fav.Title == movie.Title && fav.Year == movie.Year
               ) ? (
-                "You love this movie!"
+                <div
+                  style={{
+                    height: "80%",
+                    alignSelf: "center",
+                    marginTop: "auto"
+                  }}
+                >
+                  <Button size="sm" onClick={e => removeFav(movie.imdbID)}>
+                    Remove from Favorites
+                  </Button>
+                </div>
               ) : (
                 <div
                   style={{
@@ -70,7 +86,8 @@ const mapStateToProps = ({ movies, favorites }) => ({
 });
 
 const mapDispatchToProps = {
-  addFav
+  addFav,
+  removeFav
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieCard);

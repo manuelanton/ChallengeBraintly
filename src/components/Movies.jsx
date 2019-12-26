@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import MovieCard from "./Card";
 
 function Movies(props) {
-  return props.movies.length ? (
+  return props.movies && props.movies.length ? (
     <Container>
       <Row xs="5">
         {props.movies.map &&

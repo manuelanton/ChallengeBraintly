@@ -28,7 +28,12 @@ const Movie = ({ selectedMovie, addFav, favorites, fetchMovie, match }) => {
       <Container>
         <Row xs="2">
           <Card>
-            <CardImg top width="100%" src={selectedMovie.Poster} />
+            <CardImg
+              top
+              width="100%"
+              src={selectedMovie.Poster}
+              style={{ objectFit: "contain", maxHeight: "35em" }}
+            />
           </Card>
           <Card>
             <CardHeader tag="h3">{selectedMovie.Title}</CardHeader>
@@ -46,7 +51,9 @@ const Movie = ({ selectedMovie, addFav, favorites, fetchMovie, match }) => {
               <br />
 
               {favorites.find(
-                fav => fav.Title == movie.Title && fav.Year == movie.Year
+                fav =>
+                  fav.Title == selectedMovie.Title &&
+                  fav.Year == selectedMovie.Year
               ) ? (
                 "You love this movie!"
               ) : (

@@ -1,4 +1,9 @@
-import { RECEIVE_MOVIE, RECEIVE_MOVIES, ADD_FAVORITE } from "../constants";
+import {
+  RECEIVE_MOVIE,
+  RECEIVE_MOVIES,
+  ADD_FAVORITE,
+  REMOVE_FAVORITE
+} from "../constants";
 import axios from "axios";
 
 export const fetchMovies = name => dispatch =>
@@ -11,6 +16,11 @@ export const fetchMovie = id => dispatch =>
     .get(`https://www.omdbapi.com/?apikey=20dac387&i=${id}`)
     .then(res => res.data)
     .then(movie => dispatch(receiveMovie(movie)));
+
+export const removeFav = favID => ({
+  type: REMOVE_FAVORITE,
+  favID
+});
 
 const receiveMovies = movies => ({
   type: RECEIVE_MOVIES,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import {
@@ -19,6 +19,15 @@ import { fetchMovies } from "../store/actions/index";
 const NavBar = props => {
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    try {
+      const stringStore = JSON.stringify(props.favorites);
+      localStorage.setItem("favs", stringStore);
+    } catch (e) {
+      console.log(e);
+    }
+  }, [props.favorites]);
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -47,7 +56,11 @@ const NavBar = props => {
                   props.history.push("/movies");
                 }}
               >
-                <Button color="primary" size="sm">
+                <Button
+                  color="primary"
+                  size="sm"
+                  style={{ marginTop: "5px", marginLeft: "5px" }}
+                >
                   SEARCH
                 </Button>
                 <div style={{ float: "right" }}>
@@ -56,6 +69,7 @@ const NavBar = props => {
                     onChange={e => {
                       setSearch(e.target.value);
                     }}
+                    style={{ marginTop: "6px" }}
                   />
                 </div>
               </form>
@@ -67,7 +81,11 @@ const NavBar = props => {
   );
 };
 
-const mapStateToProps = ({ movies }) => ({ movies });
+const mapStateToProps = ({ movies, selectedMovie, favorites }) => ({
+  movies,
+  selectedMovie,
+  favorites
+});
 
 const mapDispatchToProps = { fetchMovies };
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
