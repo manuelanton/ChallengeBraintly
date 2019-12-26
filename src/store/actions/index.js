@@ -2,7 +2,8 @@ import {
   RECEIVE_MOVIE,
   RECEIVE_MOVIES,
   ADD_FAVORITE,
-  REMOVE_FAVORITE
+  REMOVE_FAVORITE,
+  PERSIST_FAVORITES
 } from "../constants";
 import axios from "axios";
 
@@ -20,6 +21,11 @@ export const fetchMovie = id => dispatch =>
 export const removeFav = favID => ({
   type: REMOVE_FAVORITE,
   favID
+});
+
+export const persistFavs = favs => ({
+  type: PERSIST_FAVORITES,
+  favs
 });
 
 const receiveMovies = movies => ({

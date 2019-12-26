@@ -2,7 +2,8 @@ import {
   RECEIVE_MOVIE,
   RECEIVE_MOVIES,
   ADD_FAVORITE,
-  REMOVE_FAVORITE
+  REMOVE_FAVORITE,
+  PERSIST_FAVORITES
 } from "../constants";
 
 const initialState = {
@@ -27,6 +28,9 @@ export default function rootReducer(state = initialState, action) {
         movie => movie.imdbID !== action.favID
       );
       return { ...state, favorites: noFav };
+    }
+    case PERSIST_FAVORITES: {
+      return { ...state, favorites: action.favs };
     }
     default:
       return state;

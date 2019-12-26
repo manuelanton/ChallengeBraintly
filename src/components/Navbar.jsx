@@ -14,18 +14,25 @@ import {
 import axios from "axios";
 import { connect } from "react-redux";
 
-import { fetchMovies } from "../store/actions/index";
+import { fetchMovies, persistFavs } from "../store/actions/index";
 
 const NavBar = props => {
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    try {
-      const stringStore = JSON.stringify(props.favorites);
-      localStorage.setItem("favs", stringStore);
-    } catch (e) {
-      console.log(e);
+    localStorage.favs !== "[]" &&
+      props.persistFavs(JSON.parse(localStorage.favs));
+  }, []);
+
+  useEffect(() => {
+    if (props.favorites) {
+      try {
+        const stringStore = JSON.stringify(props.favorites);
+        localStorage.setItem("favs", stringStore);
+      } catch (e) {
+        console.log(e);
+      }
     }
   }, [props.favorites]);
 
@@ -87,5 +94,5 @@ const mapStateToProps = ({ movies, selectedMovie, favorites }) => ({
   favorites
 });
 
-const mapDispatchToProps = { fetchMovies };
+const mapDispatchToProps = { fetchMovies, persistFavs };
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

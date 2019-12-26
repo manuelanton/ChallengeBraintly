@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "./Navbar";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import axios from "axios";
 import Movies from "./Movies";
@@ -16,6 +16,7 @@ export default function Main() {
         <Route exact path="/movies" component={Movies}></Route>
         <Route exact path="/favorites" component={Favorites} />
         <Route path="/movies/:movieID" component={Movie} />
+        <Redirect from="/" to="/movies" />
       </Switch>
     </div>
   );
