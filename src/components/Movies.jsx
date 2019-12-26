@@ -15,7 +15,7 @@ function Movies(props) {
       </Row>
     </Container>
   ) : (
-    "Please search for something first!"
+    <h1> Please search for something first!</h1>
   );
 }
 
